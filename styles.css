@@ -657,12 +657,13 @@ body {
   .decorative-element {
     width: 120px;
     height: 120px;
+
   }
   
   /* Reposicionar elementos decorativos en móviles */
   .decorative-element--left {
-    left: -30px;
-    top: 320px;
+    left: -45px;
+    top: 570px;
   }
   
   .decorative-element--right {
