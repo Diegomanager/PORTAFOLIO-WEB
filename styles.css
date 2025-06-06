@@ -1,0 +1,700 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+/* 
+   ==========================================================================
+   VARIABLES CSS
+   ==========================================================================
+   Define colores y valores reutilizables en todo el sitio
+   Facilitan el mantenimiento y consistencia del diseño
+*/
+:root {
+  --primary-color: #36B37E;     /* Color principal verde */
+  --primary-dark: #259e63;      /* Versión oscura del color principal */
+  --primary-light: #22dd83;     /* Versión clara del color principal */
+  --text-dark: #172b4d;         /* Texto oscuro (azul casi negro) */
+  --text-medium: #353535;       /* Texto gris medio */
+  --text-light: #5c5a5a;        /* Texto gris claro */
+  --bg-light: #ebf0ee;          /* Fondo gris muy claro */
+  --bg-white: #ffffff;          /* Fondo blanco puro */
+  --border-light: rgba(0, 0, 0, 0.24); /* Borde sutil con transparencia */
+  --shadow-light: rgba(0, 0, 0, 0.08); /* Sombra sutil con transparencia */
+}
+
+/* 
+   ==========================================================================
+   RESET Y ESTILOS BASE
+   ==========================================================================
+   Estilos que aplican a todos los elementos y establecen las bases del diseño
+*/
+* {
+  margin: 0;          /* Elimina márgenes por defecto del navegador */
+  padding: 0;         /* Elimina padding por defecto del navegador */
+  box-sizing: border-box; /* Hace que padding y border no afecten el ancho/alto */
+}
+
+body {
+  font-family: 'Inter', sans-serif; /* Establece Inter como fuente principal */
+  color: var(--text-dark);         /* Color de texto predeterminado */
+  background-color: var(--bg-white); /* Fondo blanco para toda la página */
+  line-height: 1.5;    /* Espaciado entre líneas para mejor legibilidad */
+}
+
+/* 
+   ==========================================================================
+   ENCABEZADO PRINCIPAL
+   ==========================================================================
+   Estilos para la barra de navegación superior fija
+*/
+.main-header {
+  position: fixed;    /* Fija la barra en la parte superior */
+  top: 0;
+  left: 0;
+  width: 100%;       /* Ocupa todo el ancho disponible */
+  z-index: 1000;     /* Asegura que esté por encima de otros elementos */
+  background: rgba(255, 255, 255, 0.85); /* Fondo blanco semitransparente */
+  backdrop-filter: blur(8px); /* Efecto de desenfoque del fondo */
+}
+
+.main-nav {
+  display: flex;
+  justify-content: center; /* Centra los elementos horizontalmente */
+  padding: 1rem 0;       /* Espaciado interno vertical */
+}
+
+.nav-menu {
+  display: flex;
+  gap: 2rem;             /* Espacio uniforme entre elementos del menú */
+  list-style: none;      /* Elimina viñetas de la lista */
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  display: inline-block; /* Permite mejor control del espaciado */
+}
+
+.nav-link {
+  text-decoration: none; /* Elimina subrayado de los enlaces */
+  color: var(--text-medium); /* Color de texto gris medio */
+  font-weight: 600;     /* Grosor de fuente seminegrita */
+  letter-spacing: 1px;  /* Espaciado entre letras para mejor legibilidad */
+  padding: 0.5rem 1rem; /* Espaciado interno para área clickeable */
+  border-radius: 4px;   /* Bordes redondeados suaves */
+  transition: all 0.2s ease; /* Transición suave para efectos hover */
+}
+
+/* Efectos al interactuar con los enlaces del menú */
+.nav-link:hover,
+.nav-link:focus {
+  background: #ff00aa;  /* Fondo magenta brillante */
+  color: var(--bg-white); /* Texto blanco */
+  box-shadow: 0 2px 8px var(--shadow-light); /* Sombra sutil */
+}
+
+/* 
+   Botón de menú móvil (hamburguesa)
+   - Oculto por defecto (solo visible en móviles)
+   - Estilo simple con cursor pointer
+*/
+.hamburguesa {
+  display: none;        /* Oculto en desktop */
+  background: none;     /* Sin fondo */
+  border: none;         /* Sin borde */
+  font-size: 2rem;      /* Tamaño grande para fácil click */
+  cursor: pointer;      /* Cursor tipo pointer */
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%); /* Centrado vertical perfecto */
+  z-index: 1100;        /* Por encima del menú desplegable */
+}
+
+/* 
+   ==========================================================================
+   SECCIÓN DE PRESENTACIÓN
+   ==========================================================================
+   Estilos para la sección hero principal (inicio)
+*/
+.presentation-section {
+  position: relative;   /* Necesario para posicionar elementos hijos */
+  display: flex;
+  flex-direction: column; /* Disposición vertical del contenido */
+  align-items: center;  /* Centrado horizontal */
+  justify-content: center; /* Centrado vertical */
+  text-align: center;   /* Alineación central del texto */
+  min-height: 100vh;    /* Altura mínima de toda la pantalla */
+  margin-top: 1rem;     /* Compensa el header fijo */
+  overflow: hidden;     /* Oculta cualquier desbordamiento */
+}
+
+/* Imágenes de fondo para la sección hero */
+.presentation-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;    /* Ajuste de imagen para cubrir el espacio */
+  z-index: 0;          /* Detrás del contenido */
+  pointer-events: none; /* Permite interacción con elementos debajo */
+}
+
+/* Versión móvil del fondo (oculta por defecto) */
+.presentation-bg--mobile {
+  display: none;
+}
+
+/* Contenedor del contenido para control de z-index */
+.presentation-content {
+  position: relative;
+  z-index: 1;          /* Asegura que esté sobre el fondo */
+  max-width: 800px;    /* Ancho máximo para mejor legibilidad */
+  padding: 0 1rem;     /* Espaciado lateral en móviles */
+}
+
+/* Título principal */
+.presentation-title {
+  font-size: 3rem;     /* Tamaño grande para impacto */
+  font-weight: 700;    /* Negrita para énfasis */
+  margin-bottom: 1rem; /* Espacio inferior */
+  line-height: 1.2;    /* Espaciado entre líneas ajustado */
+}
+
+/* Parte destacada del título */
+.highlight {
+  color: var(--primary-color); /* Color verde corporativo */
+}
+
+/* Descripción personal */
+.presentation-description {
+  font-size: 1.25rem;  /* Tamaño legible */
+  color: var(--text-medium); /* Color gris medio */
+  margin: 0 auto 2rem; /* Centrado con espacio inferior */
+  max-width: 600px;    /* Ancho óptimo para lectura */
+}
+
+/* 
+   Contenedor de enlaces a redes sociales
+   - Diseño horizontal centrado
+   - Espaciado uniforme entre iconos
+*/
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;         /* Espacio consistente entre iconos */
+  margin-top: 2rem;     /* Espacio superior */
+}
+
+/* Estilos para cada icono social */
+.social-link {
+  color: var(--text-light); /* Color gris claro */
+  font-size: 2rem;      /* Tamaño grande para visibilidad */
+  transition: color 0.2s ease; /* Transición suave al interactuar */
+}
+
+/* Efecto hover para los iconos sociales */
+.social-link:hover {
+  color: var(--primary-color); /* Color verde al interactuar */
+}
+
+/* 
+   ==========================================================================
+   SECCIÓN DE PROYECTOS
+   ==========================================================================
+   Estilos para la sección que muestra proyectos destacados
+*/
+.proyectos {
+  padding: 4rem 1rem;   /* Espaciado interno (responsive) */
+}
+
+/* Título de sección con estilo consistente */
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;    /* Tamaño destacado pero no excesivo */
+  font-weight: 700;     /* Negrita para énfasis */
+  margin-bottom: 1.5rem; /* Espacio inferior */
+  position: relative;   /* Para pseudo-elementos decorativos */
+}
+
+/* Línea decorativa bajo el título */
+.section-title::after {
+  content: "";          /* Pseudo-elemento necesario */
+  display: block;       /* Para poder aplicar width/height */
+  width: 60px;          /* Ancho controlado */
+  height: 4px;          /* Grosor de la línea */
+  background: var(--primary-color); /* Color verde */
+  margin: 0.5rem auto 0; /* Espaciado y centrado */
+  border-radius: 2px;   /* Bordes ligeramente redondeados */
+}
+
+/* Subtítulo decorativo */
+.section-subtitle {
+  display: block;       /* Para aplicar estilos específicos */
+  font-weight: 400;     /* Peso normal para contraste */
+}
+
+/* 
+   Grid de proyectos:
+   - Responsive con columnas que se ajustan automáticamente
+   - Espaciado uniforme entre elementos
+*/
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive */
+  gap: 2rem;            /* Espacio entre tarjetas */
+  max-width: 1100px;    /* Ancho máximo para contener el contenido */
+  margin: 0 auto;       /* Centrado horizontal */
+  padding: 0 1rem;      /* Espaciado lateral en móviles */
+}
+
+/* 
+   Tarjeta de proyecto individual:
+   - Borde sutil y transición hover para feedback visual
+   - Diseño de tarjeta limpio y moderno
+*/
+.project-card {
+  border: 1px solid var(--border-light); /* Borde sutil */
+  border-radius: 6px;    /* Esquinas redondeadas */
+  overflow: hidden;      /* Contiene elementos hijos */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animaciones suaves */
+}
+
+/* Efecto hover para las tarjetas de proyecto */
+.project-card:hover {
+  transform: translateY(-5px); /* Levanta ligeramente la tarjeta */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Sombra para efecto de elevación */
+}
+
+/* Contenedor de la imagen del proyecto */
+.project-image-container {
+  height: 15rem;        /* Altura fija para consistencia */
+  background: rgba(208, 209, 209, 0.35); /* Fondo gris muy claro con transparencia */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Detalles del proyecto (texto) */
+.project-details {
+  padding: 1.5rem;      /* Espaciado interno generoso */
+}
+
+/* Título del proyecto */
+.project-title {
+  font-size: 1.5rem;    /* Tamaño legible */
+  margin-bottom: 1rem;  /* Espacio inferior */
+  text-align: center;   /* Centrado para consistencia */
+}
+
+/* 
+   Contenedor de etiquetas de tecnologías:
+   - Diseño flexible que permite múltiples líneas
+   - Centrado horizontal
+*/
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;      /* Permite que las etiquetas fluyan a múltiples líneas */
+  gap: 0.5rem;          /* Espacio uniforme entre etiquetas */
+  justify-content: center; /* Centrado horizontal */
+  margin: 1rem 0;       /* Espacio vertical */
+}
+
+/* Estilos para cada etiqueta de tecnología */
+.tech-tag {
+  background: var(--bg-light); /* Fondo gris claro */
+  color: var(--text-dark);    /* Texto oscuro */
+  padding: 0.25rem 0.75rem;   /* Espaciado interno */
+  font-size: 0.8rem;          /* Tamaño pequeño */
+  border-radius: 4px;         /* Bordes redondeados */
+}
+
+/* Botón para ver detalles del proyecto */
+.project-button {
+  display: block;        /* Para controlar el ancho */
+  width: fit-content;    /* Ancho según contenido */
+  margin: 1.5rem auto 0; /* Espaciado superior y centrado */
+  padding: 0.6rem 1.25rem; /* Espaciado interno cómodo */
+  background: var(--primary-color); /* Color verde */
+  color: var(--bg-white); /* Texto blanco */
+  border: none;          /* Sin bordes */
+  border-radius: 4px;    /* Bordes redondeados */
+  font-weight: 600;      /* Negrita para énfasis */
+  text-decoration: none; /* Sin subrayado */
+  transition: background 0.2s ease; /* Transición suave */
+}
+
+/* Efecto hover para el botón */
+.project-button:hover {
+  background: var(--primary-light); /* Verde más claro al interactuar */
+}
+
+/* 
+   ==========================================================================
+   SECCIÓN DE HABILIDADES
+   ==========================================================================
+   Estilos para la sección "Acerca de mí" con habilidades técnicas
+*/
+.skills-section {
+  position: relative;   /* Para posicionar elementos decorativos */
+  padding: 4rem 1rem;   /* Espaciado interno responsive */
+  text-align: center;   /* Alineación central */
+  overflow: hidden;     /* Oculta desbordamiento de elementos decorativos */
+}
+
+/* Contenedor de elementos decorativos SVG */
+.decoration-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Permite interacción con elementos debajo */
+  z-index: 0;          /* Detrás del contenido principal */
+}
+
+/* Estilos base para elementos decorativos */
+.decorative-element {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+}
+
+/* Posicionamiento del elemento decorativo izquierdo */
+.decorative-element--left {
+  left: -60px;
+  top: 200px;
+}
+
+/* Posicionamiento del elemento decorativo derecho */
+.decorative-element--right {
+  right: -50px;
+  top: -60px;
+}
+
+/* Descripción de la sección */
+.section-description {
+  font-size: 1.25rem;  /* Tamaño legible */
+  color: var(--text-medium); /* Color gris medio */
+  max-width: 600px;    /* Ancho óptimo para lectura */
+  margin: 0 auto 2rem; /* Centrado con espacio inferior */
+}
+
+/* Botón para descargar CV */
+.download-button {
+  display: inline-block; /* Para controlar el padding */
+  padding: 0.75rem 1.5rem; /* Espaciado interno generoso */
+  background: var(--primary-color); /* Color verde */
+  color: var(--bg-white); /* Texto blanco */
+  border: none;          /* Sin bordes */
+  border-radius: 8px;    /* Bordes más redondeados */
+  font-weight: 600;      /* Negrita para énfasis */
+  text-decoration: none; /* Sin subrayado */
+  transition: background 0.2s ease; /* Transición suave */
+  margin-bottom: 3rem;   /* Espacio inferior */
+}
+
+/* Efecto hover para el botón */
+.download-button:hover {
+  background: var(--primary-dark); /* Verde más oscuro al interactuar */
+}
+
+/* 
+   Grid de tarjetas de habilidades:
+   - Responsive con columnas que se ajustan automáticamente
+   - Espaciado uniforme
+*/
+.skills-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive */
+  gap: 2rem;            /* Espacio entre tarjetas */
+  max-width: 1100px;    /* Ancho máximo controlado */
+  margin: 0 auto;       /* Centrado horizontal */
+}
+
+/* Tarjeta individual de habilidad */
+.skill-card {
+  background: var(--bg-light); /* Fondo gris claro */
+  border: 1px solid var(--border-light); /* Borde sutil */
+  border-radius: 16px;   /* Bordes muy redondeados */
+  padding: 2rem 1.5rem;  /* Espaciado interno generoso */
+  display: flex;
+  flex-direction: column; /* Disposición vertical */
+  align-items: center;   /* Centrado horizontal */
+}
+
+/* Contenedor del icono de la tarjeta */
+.skill-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;    /* Forma circular */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem; /* Espacio inferior */
+}
+
+/* Categoría de habilidad (Lenguajes, Frameworks, etc.) */
+.skill-category {
+  font-size: 1.5rem;    /* Tamaño destacado */
+  margin-bottom: 1rem;  /* Espacio inferior */
+}
+
+/* 
+   Contenedor de etiquetas de habilidades:
+   - Diseño flexible que permite múltiples líneas
+   - Centrado horizontal
+*/
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;      /* Permite múltiples líneas */
+  gap: 0.5rem;          /* Espacio uniforme entre etiquetas */
+  justify-content: center; /* Centrado horizontal */
+}
+
+/* Estilos para cada etiqueta de habilidad */
+.skill-tag {
+  background: var(--bg-white); /* Fondo blanco */
+  color: var(--primary-color); /* Texto verde */
+  padding: 0.5rem 1rem; /* Espaciado interno */
+  font-size: 0.8rem;    /* Tamaño pequeño */
+  border-radius: 8px;   /* Bordes redondeados */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* Sombra sutil */
+}
+
+/* 
+   ==========================================================================
+   FORMULARIO DE CONTACTO
+   ==========================================================================
+   Estilos para la sección del formulario de contacto
+*/
+.contact-container {
+  position: relative;   /* Para posicionar elementos decorativos */
+  margin-top: 5rem;     /* Espacio superior */
+  padding: 3rem 1rem;   /* Espaciado interno responsive */
+}
+
+/* Contenedor de elementos decorativos */
+.contact-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Permite interacción con elementos debajo */
+  z-index: 0;          /* Detrás del contenido */
+}
+
+/* Estilos base para elementos decorativos del formulario */
+.contact-decor {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+}
+
+/* Posicionamiento del elemento decorativo izquierdo */
+.contact-decor--left {
+  left: -60px;
+  top: 80px;
+}
+
+/* Posicionamiento del elemento decorativo derecho */
+.contact-decor--right {
+  right: -60px;
+  top: 60px;
+}
+
+/* Texto introductorio del formulario */
+.contact-intro {
+  font-size: 2rem;      /* Tamaño grande para impacto */
+  font-weight: 700;     /* Negrita para énfasis */
+  max-width: 500px;     /* Ancho óptimo para lectura */
+  margin: 0 auto 2rem;  /* Centrado con espacio inferior */
+  line-height: 1.3;     /* Espaciado entre líneas */
+  position: relative;   /* Para control de z-index */
+  z-index: 1;          /* Sobre los elementos decorativos */
+}
+
+/* Contenedor del formulario */
+.contact-form {
+  max-width: 500px;     /* Ancho controlado */
+  margin: 0 auto;       /* Centrado horizontal */
+  position: relative;   /* Para control de z-index */
+  z-index: 1;          /* Sobre los elementos decorativos */
+}
+
+/* Grupo de campos del formulario */
+.form-group {
+  margin-bottom: 1.5rem; /* Espacio entre grupos */
+}
+
+/* Grupo doble para campos como nombre y apellido */
+.form-group--double {
+  display: flex;
+  gap: 1rem;            /* Espacio entre campos */
+}
+
+/* Campos de entrada y textarea */
+.form-input,
+.form-textarea {
+  width: 100%;          /* Ocupa todo el ancho disponible */
+  padding: 0.75rem 1rem; /* Espaciado interno cómodo */
+  border: 1px solid #ccc; /* Borde sutil */
+  border-radius: 6px;   /* Bordes redondeados */
+  font-family: 'Inter', sans-serif; /* Fuente consistente */
+}
+
+/* Estilos específicos para el textarea */
+.form-textarea {
+  min-height: 120px;    /* Altura mínima */
+  resize: vertical;     /* Permite redimensionar solo verticalmente */
+}
+
+/* Botón de envío del formulario */
+.submit-button {
+  display: block;        /* Para controlar el ancho */
+  width: fit-content;    /* Ancho según contenido */
+  margin: 0 auto;       /* Centrado horizontal */
+  padding: 0.75rem 1.5rem; /* Espaciado interno generoso */
+  background: var(--primary-color); /* Color verde */
+  color: var(--bg-white); /* Texto blanco */
+  border: none;          /* Sin bordes */
+  border-radius: 6px;    /* Bordes redondeados */
+  font-weight: 600;      /* Negrita para énfasis */
+  cursor: pointer;       /* Cursor tipo pointer */
+  transition: background 0.2s ease; /* Transición suave */
+}
+
+/* Efecto hover para el botón */
+.submit-button:hover {
+  background: var(--primary-dark); /* Verde más oscuro al interactuar */
+}
+
+/* 
+   ==========================================================================
+   PIE DE PÁGINA
+   ==========================================================================
+   Estilos para la sección final de la página
+*/
+.main-footer {
+  background: var(--bg-white); /* Fondo blanco */
+  border-top: 1px solid var(--bg-light); /* Borde superior sutil */
+  padding: 2rem 0;     /* Espaciado interno */
+  margin-top: 3rem;    /* Espacio superior */
+}
+
+/* Contenedor de enlaces a redes sociales */
+.footer-social-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;           /* Espacio uniforme entre iconos */
+}
+
+/* 
+   ==========================================================================
+   DISEÑO RESPONSIVE (MEDIA QUERIES)
+   ==========================================================================
+   Estilos específicos para pantallas menores a 768px (tablets y móviles)
+*/
+@media (max-width: 768px) {
+  /* Ajustes para la barra de navegación */
+  .main-nav {
+    justify-content: flex-end; /* Alinea el menú hamburguesa a la derecha */
+    padding: 1rem;            /* Espaciado interno reducido */
+  }
+  
+  /* Menú principal en versión móvil */
+  .nav-menu {
+    display: none;            /* Oculto por defecto */
+    position: fixed;          /* Fijo en la pantalla */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Fondo oscuro semitransparente */
+    flex-direction: column;   /* Disposición vertical */
+    align-items: center;      /* Centrado horizontal */
+    justify-content: center;  /* Centrado vertical */
+    padding-top: 5rem;       /* Espacio superior para no tapar el logo */
+    z-index: 1000;           /* Por encima de otros elementos */
+  }
+  
+  /* Estado activo del menú móvil */
+  .nav-menu.active {
+    display: flex;            /* Visible cuando está activo */
+  }
+  
+  /* Elementos del menú en móvil */
+  .nav-item {
+    margin: 1rem 0;          /* Espacio vertical entre elementos */
+  }
+  
+  /* Enlaces del menú en móvil */
+  .nav-link {
+    font-size: 1.5rem;       /* Tamaño grande para fácil interacción */
+    color: var(--bg-white);  /* Texto blanco para contraste */
+  }
+  
+  /* Mostrar botón de menú hamburguesa en móviles */
+  .hamburguesa {
+    display: block;          /* Visible solo en móviles */
+  }
+  
+  /* Cambiar fondo de escritorio por el de móvil */
+  .presentation-bg--desktop {
+    display: none;           /* Oculta versión desktop */
+  }
+  
+  .presentation-bg--mobile {
+    display: block;          /* Muestra versión móvil */
+  }
+  
+  /* Reducir tamaño del título en móviles */
+  .presentation-title {
+    font-size: 2.5rem;
+  }
+  
+  /* Reducir tamaño de elementos decorativos en móviles */
+  .decorative-element {
+    width: 120px;
+    height: 120px;
+  }
+  
+  /* Reposicionar elementos decorativos en móviles */
+  .decorative-element--left {
+    left: -30px;
+    top: 320px;
+  }
+  
+  .decorative-element--right {
+    right: -30px;
+    top: 10px;
+  }
+  
+  /* Reducir tamaño de elementos decorativos del formulario */
+  .contact-decor {
+    width: 120px;
+    height: 120px;
+  }
+  
+  /* Reposicionar elementos decorativos del formulario */
+  .contact-decor--left {
+    left: -30px;
+    top: 620px;
+  }
+  
+  .contact-decor--right {
+    right: -30px;
+    top: 600px;
+  }
+  
+  /* Reducir tamaño del texto introductorio del formulario */
+  .contact-intro {
+    font-size: 1.8rem;
+  }
+  
+  /* Cambiar disposición de campos dobles a vertical en móviles */
+  .form-group--double {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
