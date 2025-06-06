@@ -586,7 +586,7 @@ body {
 .footer-social-links {
   display: flex;
   justify-content: center;
-  gap: 2rem;           /* Espacio uniforme entre iconos */
+  gap: 1.4rem;           /* Espacio uniforme entre iconos */
 }
 
 /* 
