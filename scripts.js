@@ -1,3 +1,28 @@
+document.addEventListener("DOMContentLoaded", () => {
+
+  //---------------------- MENU DESPLEGABLE ------------------------------------
+  const hamburguesa = document.getElementById('hamburguesa');
+  const navMenu = document.getElementById('navMenu');
+
+  if (hamburguesa && navMenu) {
+  //-------------------------- ABRIR/CERRAR -----------------------------------
+  hamburguesa.addEventListener('click', function () {
+    navMenu.classList.toggle('active');
+    hamburguesa.classList.toggle('active'); // Animación del botón
+  });
+
+  //-------------------- CERRAR AL DESPLAZARSE ------------------------------------------
+  const navItems = navMenu.querySelectorAll('a'); // Selecciona todos los enlaces dentro del menú
+  navItems.forEach(item => {
+    item.addEventListener('click', function () {
+      navMenu.classList.remove('active'); // Cierra el menú
+      hamburguesa.classList.remove('active'); // Resetea la animación del botón
+    });
+  });
+}
+
+
+
 // Validación de formulario y localStorage
 
 const errorMessage = document.querySelector('.error-message');
@@ -46,3 +71,4 @@ if (savedData) {
   emailInput.value = localData.email;
   messageInput.value = localData.message;
 }
+});

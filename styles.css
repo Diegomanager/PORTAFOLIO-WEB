@@ -100,14 +100,14 @@ body {
   display: none;        /* Oculto en desktop */
   background: none;     /* Sin fondo */
   border: none;         /* Sin borde */
-  font-size: 2rem;      /* Tamaño grande para fácil click */
+  font-size: 3rem;      /* Tamaño grande para fácil click */
   cursor: pointer;      /* Cursor tipo pointer */
   position: absolute;
   right: 2rem;
-  top: 50%;
-  transform: translateY(-50%); /* Centrado vertical perfecto */
   z-index: 1100;        /* Por encima del menú desplegable */
 }
+
+
 
 /* 
    ==========================================================================
@@ -609,13 +609,19 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8); /* Fondo oscuro semitransparente */
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.8); /* Fondo oscuro semitransparente */
     flex-direction: column;   /* Disposición vertical */
     align-items: center;      /* Centrado horizontal */
     justify-content: center;  /* Centrado vertical */
-    padding-top: 5rem;       /* Espacio superior para no tapar el logo */
+    padding-top: 2rem;       /* Espacio superior para no tapar el logo */
     z-index: 1000;           /* Por encima de otros elementos */
+  }
+
+  .nav-menu a {
+    color: rgb(0, 0, 0);
+    font-size: 1.7rem;        /* Tamaño de fuente más pequeño */
+    font-family: 'Inter', 'Arial Narrow Bold', sans-serif;     
   }
   
   /* Estado activo del menú móvil */
