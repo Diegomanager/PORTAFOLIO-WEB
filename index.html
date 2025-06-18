@@ -39,7 +39,7 @@
       - Solo visible en pantallas pequeñas
       - Controla la visibilidad del menú principal en móviles
     -->
-    <button class="hamburguesa" id="hamburguesa" >
+    <button class="hamburguesa" id="hamburguesa">
       <span class="menu-icon">&#9776;</span>
       <span></span>
       <span></span>
@@ -82,16 +82,85 @@
   </div>
 </section>
 
+
+<!--
+  ========================================================================
+  SECCIÓN DE PROYECTOS
+  ========================================================================
+  Muestra los proyectos destacados en formato de tarjetas
+-->
+<section class="proyectos" id="proyectos">
+  <!-- Título de la sección con subtítulo decorativo -->
+  <h2 class="section-title">Mis Proyectos<br><span class="section-subtitle">Recientes</span></h2>
   
-
-<section>PROYECTOS
-
-
-
-
-
+  <!-- 
+    Grid de proyectos:
+    - Diseño responsive que se adapta al número de columnas según el ancho
+    - Cada proyecto es un article semántico
+  -->
+  <div class="projects-grid">
+    
+    <!-- Proyecto 1 -->
+    <article class="project-card">
+      <!-- Contenedor de la imagen del proyecto -->
+      <div class="project-image-container">
+        <img src="IMAGEN/perro.jpg" alt=" ">
+        <!-- La imagen del proyecto se insertaría aquí -->
+      </div>
+      <!-- Detalles del proyecto -->
+      <div class="project-details">
+        <h3 class="project-title">Proyecto 1</h3>
+        <!-- Tecnologías utilizadas en el proyecto -->
+        <div class="tech-tags">
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">CSS</span>
+          <span class="tech-tag">HTML</span>
+          <span class="tech-tag">React</span>
+        </div>
+        <!-- Botón para ver más detalles del proyecto -->
+        <a class="project-button" href="#">Ver proyecto</a>
+      </div>
+    </article>
+  </div>
 </section>
 
+<!-- Flecha hacia abajo para navegar a la sección de proyectos -->
+  <div class="down-arrow-container">
+    <span class="down-arrow-circle">
+      <i class="fas fa-chevron-down"></i>
+    </span>
+  </div>
+<!----------------------- MODAL ------------------------------->
+<div id="projectModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close" id="closeModal">&times;</span>
+    <div class="modal-img">
+      <img src="IMAGEN/imgmodal1.png" alt="Proyecto" />
+    </div>
+    <div class="modal-header">
+      <h2 class="modal-title">Keeping track of hundreds of components</h2>
+      <div class="modal-buttons">
+        <button class="modal-btn">
+          See live
+          <i class="fas fa-arrow-up-right-from-square"></i>
+        </button>
+        <button class="modal-btn">
+          See source
+          <i class="fab fa-github"></i>
+        </button>
+</div>
+    </div>
+    <div class="modal-languages">
+      <span class="lang-badge">Ruby on Rails</span>
+      <span class="lang-badge">CSS</span>
+      <span class="lang-badge">JavaScript</span>
+      <span class="lang-badge">HTML</span>
+    </div>
+    <div class="modal-description">
+      <p>lorem ipsum dolor sit amlorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod temporlorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod temporlorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod temporlorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod temporlorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod temporlorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod temporlorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod temporet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    </div>
+  </div>
+</div>
 
 
 
@@ -175,32 +244,53 @@
   </div>
   
 
+<!--
+  ========================================================================
+  FORMULARIO DE CONTACTO
+  ========================================================================
+  Sección anidada para mantener el diseño consistente
+-->
 <section class="contact-container" id="formulario-contacto">
-  <!-- Elementos decorativos opcionales -->
+  <!-- Elementos decorativos para el formulario -->
   <div class="contact-decoration">
-    <img src="IMAGEN/imgformi.svg" alt="" class="contact-decor contact-decor--left" />
-    <img src="IMAGEN/imgformd.svg" alt="" class="contact-decor contact-decor--right" />
+    <img class="contact-decor contact-decor--left" src="IMAGEN/imgformi.svg" alt="Decoración izquierda del formulario">
+    <img class="contact-decor contact-decor--right" src="IMAGEN/imgformd.svg" alt="Decoración derecha del formulario">
   </div>
-
+  
+  <!-- Texto introductorio al formulario (combinando ambos textos) -->
   <div class="contact-intro">
     ¿Tienes un proyecto o quieres contactarme?<br>
-    ¡Envíame un mensaje!
+    Estoy interesado en escuchar sobre nuevos proyectos. ¡Envíame un mensaje!
   </div>
-
-  <form id="contact" class="contact-form" action="https://formspree.io/f/xgvyagej" method="post" >
-    <div class="form-group">
-      <label for="name">Nombre:</label>
-      <input type="text" id="name" name="user_name" maxlength="30" required class="form-input"/>
+  
+  <!-- 
+    Formulario funcional que envía datos a Formspree:
+    - Campos para nombre, apellido, email y mensaje
+    - Validación HTML5 con required
+    - Diseño responsive
+    - Validación personalizada para email en minúsculas
+  -->
+  <form id="contact" class="contact-form" action="https://formspree.io/f/xgvyagej" method="post">
+    <!-- Grupo de campos para nombre y apellido -->
+    <div class="form-group form-group--double">
+        <input type="text" id="name" placeholder="Nombre" name="user_name" maxlength="50" required class="form-input" aria-label="Tu nombre">
+        <input type="text" id="lastname" placeholder="Apellido" name="user_lastname" maxlength="50" required class="form-input" aria-label="Tu apellido">
     </div>
+    
+    <!-- Campo para email -->
     <div class="form-group">
-      <label for="email">Correo electrónico:</label>
-      <input type="email" id="email" name="user_mail" required class="form-input"/>
+      <input type="email" id="email" placeholder="Correo electrónico" name="user_mail" required class="form-input" aria-label="Tu correo electrónico">
     </div>
+    
+    <!-- Área de texto para el mensaje -->
     <div class="form-group">
-      <label for="textform">Mensaje:</label>
-      <textarea id="textform" maxlength="500" placeholder="Escribe tu mensaje aquí..." name="user_message" class="form-textarea"></textarea>
+      <textarea id="textform" maxlength="500" placeholder="Escribe tu mensaje aquí..." name="user_message" class="form-textarea" required aria-label="Tu mensaje"></textarea>
     </div>
+    
+    <!-- Botón de envío del formulario -->
     <button type="submit" class="submit-button">Envíe su mensaje</button>
+    
+    <!-- Mensaje de error para validación de email -->
     <div class="error-message" style="display:none; color:#dd5353; margin-top:10px;">
       El correo debe estar en minúsculas y tener un formato válido.
     </div>
@@ -234,3 +324,4 @@
 
 </body>
 </html>
+

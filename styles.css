@@ -108,6 +108,35 @@ body {
 }
 
 
+/*
+.hamburguesa {
+  width: 30px; 
+  height: 30px; 
+  flex-direction: column; 
+  justify-content: center;
+  gap: 8px; 
+}
+.hamburguesa span {
+  display: block; 
+  height: 4px; 
+  width: 100%; 
+  background: #000000be;
+  border-radius: 2px;
+  transition: 0.4s;
+}
+.hamburguesa.active span:nth-child(1) {
+  transform: translateY(12px) rotate(45deg); 
+  background: #000000;
+}
+.hamburguesa.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburguesa.active span:nth-child(3) {
+  transform: translateY(-12px) rotate(-45deg); 
+  background: #000000;
+
+  */
+
 
 /* 
    ==========================================================================
@@ -668,8 +697,9 @@ body {
   
   /* Reposicionar elementos decorativos en móviles */
   .decorative-element--left {
-    left: -45px;
-    top: 570px;
+    left: -45px;  
+    top: 470px;   
+    z-index: -77777; /* Asegura que no tape el contenido */
   }
   
   .decorative-element--right {
