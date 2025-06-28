@@ -3,77 +3,171 @@ document.addEventListener("DOMContentLoaded", () => {
    * ========================================================================
    * MENÚ DESPLEGABLE (HAMBURGUESA)
    * ========================================================================
-   * Maneja:
-   * 1. Apertura/cierre del menú móvil
-   * 2. Animación del botón hamburguesa
-   * 3. Cierre automático al seleccionar un enlace
    */
   const hamburguesa = document.getElementById('hamburguesa');
   const navMenu = document.getElementById('navMenu');
 
   if (hamburguesa && navMenu) {
-    //-------------------------- ABRIR/CERRAR -----------------------------------
     hamburguesa.addEventListener('click', function () {
       navMenu.classList.toggle('active');
-      hamburguesa.classList.toggle('active'); // Animación del botón
+      hamburguesa.classList.toggle('active');
     });
 
-    //-------------------- CERRAR AL DESPLAZARSE ---------------------------------
-    const navItems = navMenu.querySelectorAll('a'); // Selecciona todos los enlaces dentro del menú
+    const navItems = navMenu.querySelectorAll('a');
     navItems.forEach(item => {
       item.addEventListener('click', function () {
-        navMenu.classList.remove('active'); // Cierra el menú
-        hamburguesa.classList.remove('active'); // Resetea la animación del botón
+        navMenu.classList.remove('active');
+        hamburguesa.classList.remove('active');
       });
     });
   }
 
   /**
    * ========================================================================
-   * MODAL DE PROYECTO
+   * PROYECTOS Y MODAL
    * ========================================================================
-   * Maneja:
-   * 1. Apertura del modal al hacer clic en botones de proyecto
-   * 2. Cierre del modal con botón o haciendo clic fuera
-   * 3. Bloqueo del scroll de fondo cuando el modal está abierto
    */
+  const newProjects = [
+    {
+      title: "Project 1", 
+      image: "IMAGEN/perro.jpg",
+      languages: ["HTML", "CSS", "JavaScript"], 
+      link: "#",
+      modalImage: "IMAGEN/imgmodal1.png",
+      modalDescription: "Descripción detallada del proyecto 1."
+    },
+    {
+      title: "Project 2",
+      image: "imagen/nose.jpg",
+      languages: ["React", "Node.js"],
+      link: "#",
+      modalImage: "IMAGEN/imgmodal1.png",
+      modalDescription: "Descripción detallada del proyecto 2."
+    },
+    {
+      title: "Project 3",
+      image: "imagen/saul.jpg",
+      languages: ["Python", "Django"],
+      link: "#",
+      modalImage: "IMAGEN/imgmodal1.png",
+      modalDescription: "Descripción detallada del proyecto 3."
+    },
+    {
+      title: "Project 4",
+      image: "imagen/alizee.jpg",
+      languages: ["Python", "Django"],
+      link: "#",
+      modalImage: "IMAGEN/imgmodal1.png",
+      modalDescription: "Descripción detallada del proyecto 4."
+    },
+    {
+      title: "Project 5",
+      image: "imagen/superman.jpg",
+      languages: ["Python", "Django"],
+      link: "#",
+      modalImage: "IMAGEN/imgmodal1.png",
+      modalDescription: "Descripción detallada del proyecto 5."
+    },
+    {
+      title: "Project 6",
+      image: "imagen/supra.jpg",
+      languages: ["Python", "Django"],
+      link: "#",
+      modalImage: "IMAGEN/imgmodal1.png",
+      modalDescription: "Descripción detallada del proyecto 6."
+    }
+  ];
+
+  // Elementos del modal
   const modal = document.getElementById('projectModal');
-  const openModalBtns = document.querySelectorAll('.project-button'); // Todos los botones que abren modal
+  const modalTitle = document.querySelector('.modal-title');
+  const modalImage = document.querySelector('.modal-img img');
+  const modalDescription = document.querySelector('.modal-description p');
+  const modalTechnologies = document.querySelector('.modal-languages');
+  const liveDemoBtn = document.querySelector('.modal-buttons button:first-child');
+  const sourceCodeBtn = document.querySelector('.modal-buttons button:last-child');
   const closeModalBtn = document.getElementById('closeModal');
 
-  if (openModalBtns.length > 0 && modal && closeModalBtn) {
-    // Configura eventos para cada botón que abre el modal
-    openModalBtns.forEach(btn => {
-      btn.addEventListener('click', function(e) {
+  // Generar proyectos
+  function generarProyectos() {
+    const projectsGrid = document.querySelector('.projects-grid');
+    projectsGrid.innerHTML = ''; // Limpiar proyectos existentes
+    
+    newProjects.forEach((project, index) => {
+      const projectCard = document.createElement('article');
+      projectCard.className = 'project-card';
+      projectCard.dataset.projectId = index;
+      
+      projectCard.innerHTML = `
+        <div class="project-image-container">
+          <img src="${project.image}" alt="${project.title}">
+        </div>
+        <div class="project-details">
+          <h3 class="project-title">${project.title}</h3>
+          <div class="tech-tags">
+            ${project.languages.map(lang => `<span class="tech-tag">${lang}</span>`).join('')}
+          </div>
+          <a class="project-button" href="#" data-project-id="${index}">Ver proyecto</a>
+        </div>
+      `;
+      
+      projectsGrid.appendChild(projectCard);
+    });
+
+    // Configurar eventos para los botones de proyecto
+    document.querySelectorAll('.project-button, .project-card').forEach(button => {
+      button.addEventListener('click', (e) => {
         e.preventDefault();
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Bloquea el scroll de fondo
+        const projectId = button.dataset.projectId || button.closest('.project-card').dataset.projectId;
+        const project = newProjects[projectId];
+        
+        if (project) {
+          modalTitle.textContent = project.title;
+          modalImage.src = project.modalImage;
+          modalImage.alt = project.title;
+          modalDescription.textContent = project.modalDescription;
+          
+          // Actualizar tecnologías en el modal
+          modalTechnologies.innerHTML = '';
+          project.languages.forEach(lang => {
+            const techBadge = document.createElement('span');
+            techBadge.className = 'lang-badge';
+            techBadge.textContent = lang;
+            modalTechnologies.appendChild(techBadge);
+          });
+          
+          // Configurar botones del modal
+          liveDemoBtn.onclick = () => window.open(project.link, '_blank');
+          sourceCodeBtn.onclick = () => window.open(project.link, '_blank');
+          
+          modal.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        }
       });
     });
-    
-    // Configura evento para botón de cerrar
-    closeModalBtn.addEventListener('click', function() {
-      modal.style.display = 'none';
-      document.body.style.overflow = ''; // Restaura el scroll
-    });
-    
-    // Cierra modal al hacer clic fuera del contenido
-    modal.addEventListener('click', function(e) {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-      }
-    });
   }
+
+  // Cerrar modal
+  closeModalBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  });
+
+  // Cerrar al hacer clic fuera del modal
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Generar proyectos al cargar la página
+  generarProyectos();
 
   /**
    * ========================================================================
    * VALIDACIÓN DE FORMULARIO Y GESTIÓN DE LOCALSTORAGE
    * ========================================================================
-   * Maneja:
-   * 1. Validación del formato de email (debe estar en minúsculas)
-   * 2. Almacenamiento en localStorage para guardar el progreso del formulario
-   * 3. Recuperación de datos al recargar la página
    */
   const errorMessage = document.querySelector('.error-message');
   const form = document.getElementById('contact');
@@ -84,10 +178,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const lastnameInput = document.getElementById('lastname');
     const messageInput = document.getElementById('textform');
 
-    // Expresión regular para validar email (solo minúsculas)
     const emailRegex = /^[a-z0-9_.]+@[a-z0-9_.]+\.[a-z0-9_.]+$/;
 
-    // Objeto para almacenar datos en localStorage
     let localData = {
       name: '',
       lastname: '', 
@@ -95,7 +187,6 @@ document.addEventListener("DOMContentLoaded", () => {
       message: '',
     };
 
-    // ==================== VALIDACIÓN DE FORMULARIO ====================
     form.addEventListener('submit', (e) => {
       if (!emailRegex.test(email.value)) {
         e.preventDefault();
@@ -108,7 +199,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // ==================== GESTIÓN DE LOCALSTORAGE ====================
     function dataLocalStore() {
       localStorage.setItem('contactFormData', JSON.stringify(localData));
     }
@@ -121,7 +211,6 @@ document.addEventListener("DOMContentLoaded", () => {
       dataLocalStore();
     });
 
-    // Recuperar datos al cargar la página
     const savedData = JSON.parse(localStorage.getItem('contactFormData'));
     if (savedData) {
       localData = savedData;
