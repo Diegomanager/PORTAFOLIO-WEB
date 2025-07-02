@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       title: "Project 2",
-      image: "imagen/nose.jpg",
+      image: "imagen/eminem.png",
       languages: ["React", "Node.js"],
       link: "#",
       modalImage: "IMAGEN/imgmodal1.png",
