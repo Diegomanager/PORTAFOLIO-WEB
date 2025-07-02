@@ -601,7 +601,7 @@ body {
   display: flex;
   position: relative;   /* Para posicionar elementos decorativos */
   margin-top: 5rem;     /* Espacio superior */
-  padding: 3rem 1rem;   /* Espaciado interno responsive */
+  padding: 3rem 20rem;   /* Espaciado interno responsive */
 }
 
 /* Contenedor de elementos decorativos */
@@ -901,16 +901,7 @@ body {
     height: 120px;
   }
   
-  .decorative-element--left {
-    left: -45px;
-    top: 65vh;
-    z-index: -1;
-  }
-  
-  .decorative-element--right {
-    right: -30px;
-    top: 10px;
-  }
+
   
   /* Sección de proyectos */
   .proyectos {
@@ -994,7 +985,7 @@ body {
   display: flex;
   position: relative;
   margin-top: 5rem;
-  padding: 3rem 1rem;
+  padding: 3rem 20rem;
   gap: 1rem; /* Reducido de 2rem a 1rem para compactar */
   align-items: flex-start;
   justify-content: center;
